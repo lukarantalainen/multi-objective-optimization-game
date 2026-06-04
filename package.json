@@ -1,0 +1,20 @@
+{
+  "name": "multi-objective-optimization-game",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/lukarantalainen/multi-objective-optimization-game#readme",
+  "bugs": {
+    "url": "https://github.com/lukarantalainen/multi-objective-optimization-game/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukarantalainen/multi-objective-optimization-game.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
