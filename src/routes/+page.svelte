@@ -1,5 +1,5 @@
-<script>
-    let value = 0;
+<script lang="ts">
+    let value: number = $state(0);
 </script>
 
 <head>
@@ -30,7 +30,7 @@
         <div class="left">
             <h2>Options</h2>
             <div class="options-container">
-                <input type="range" name="weight" id="0" class="slider" bind:value> <span></span>
+                <input type="range" name="weight" id="0" class="slider"> <span>hi{value}</span>
                 <input type="range" name="weight" id="1" class="slider">
                 <input type="range" name="weight" id="2" class="slider">
                 <input type="range" name="weight" id="3" class="slider">
