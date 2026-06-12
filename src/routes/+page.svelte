@@ -1,2 +1,110 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+    let value = 0;
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Optimointipeli</title>
+</head>
+
+
+
+<body>
+    <nav class="navbar">
+        <div class="button-container">
+            <button class="nav-button">Button 1</button>
+            <button class="nav-button">Button 2</button>
+            <button class="nav-button">Button 3</button>
+        </div>
+
+        <a href="dashboard.html">Dashboard</a>
+
+      
+    </nav>
+        
+
+    <div class="content">
+        <div class="left">
+            <h2>Options</h2>
+            <div class="options-container">
+                <input type="range" name="weight" id="0" class="slider" bind:value> <span></span>
+                <input type="range" name="weight" id="1" class="slider">
+                <input type="range" name="weight" id="2" class="slider">
+                <input type="range" name="weight" id="3" class="slider">
+            </div>
+        </div>
+        
+
+        <div class="graph">
+            
+        </div>
+    </div>
+</body>
+
+<style>
+    body {
+        margin: 0;
+        width: 100%;
+        font-family: Inter, serif;
+    }
+    
+    button {
+        font-size: 20px;
+    }
+
+
+    .content {
+        padding: 10px;
+        width: inherit;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1em;   
+    }
+
+
+    .navbar {
+        width: inherit;
+        padding: 10px;
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid gray;
+
+    }
+
+    .button-container {
+        display: flex;
+        width: fit-content;
+        gap: 1em;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .nav-button {
+        border-radius: 10px;
+        transition-duration: 200ms;
+        border: none;
+        padding: 4px 10px;
+        background-color: white;
+    }
+
+    .nav-button:hover {
+        background-color: lightskyblue;
+    }
+    
+    .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+    }
+
+    .graph {
+        background-color: blue;
+        
+    }
+</style>
