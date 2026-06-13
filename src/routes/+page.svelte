@@ -1,60 +1,76 @@
 <script lang="ts">
-    let value: number = $state(0);
+    import Graph from './Graph.svelte';
+
+    let price: number = $state(0);
+    let value2: number = $state(0);
+    let value3: number = $state(0);
+    let value4: number = $state(0);
+    let day: number = $state(1);
+    let inventory: number = $state(0);
+    let buyers: number = 0;
+    let money: number = $state(0);
+
+
+    function increase_day() {
+        day += 1;
+        if (inventory > 0 && buyers > 0) {
+            inventory -= 1;
+            buyers -= 1;
+            money += price;
+        }
+
+        if (price < 50) {
+            buyers += 1;
+        }
+        
+    }
+
+    function increment() {
+        inventory += 1;
+    }
+
+    let dayInterval = setInterval(increase_day, 1000);
 </script>
 
-<head>
-    <meta charset="utf-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" >
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <title>Optimointipeli</title>
-</head>
-
-
-
-<body>
-    <nav class="navbar">
-        <div class="button-container">
-            <button class="nav-button">Button 1</button>
-            <button class="nav-button">Button 2</button>
-            <button class="nav-button">Button 3</button>
+<div class="container">
+    <div class="top-bar">
+        <div class="left-container">
+            <span>Day {day}</span>
+            <span>Inventory {inventory}</span>
         </div>
-
-        <a href="dashboard.html">Dashboard</a>
-
-      
-    </nav>
+        <div class="stat-container">
+            <span>Sold</span>
+            <span>Customers</span>
+            <span>Money {money}</span>
+            <span>Time</span>
+        </div>
         
-
+    </div>
     <div class="content">
         <div class="left">
-            <h2>Options</h2>
+        <h2>Options</h2>
             <div class="options-container">
-                <input type="range" name="weight" id="0" class="slider"> <span>hi{value}</span>
-                <input type="range" name="weight" id="1" class="slider">
-                <input type="range" name="weight" id="2" class="slider">
-                <input type="range" name="weight" id="3" class="slider">
+                <button onclick={increment}>Make</button>
+                <input type="range" name="weight" id="0" class="slider" bind:value={price}>
+                <span>{price}</span>
+                <input type="range" name="weight" id="1" class="slider" bind:value={value2}>
+                <span>{value2}</span>
+                <input type="range" name="weight" id="2" class="slider" bind:value={value3}>
+                <span>{value3}</span>
+                <input type="range" name="weight" id="3" class="slider" bind:value={value4}>
+                <span>{value4}</span>
             </div>
         </div>
-        
-
-        <div class="graph">
-            
-        </div>
+        <Graph/>
     </div>
-</body>
+    
+</div>
 
 <style>
-    body {
+    :global(body) {     
         margin: 0;
-        width: 100%;
-        font-family: Inter, serif;
+        padding: 0; 
     }
-    
-    button {
-        font-size: 20px;
-    }
-
 
     .content {
         padding: 10px;
@@ -64,38 +80,6 @@
         gap: 1em;   
     }
 
-
-    .navbar {
-        width: inherit;
-        padding: 10px;
-        display: flex;
-        flex-grow: 1;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid gray;
-
-    }
-
-    .button-container {
-        display: flex;
-        width: fit-content;
-        gap: 1em;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .nav-button {
-        border-radius: 10px;
-        transition-duration: 200ms;
-        border: none;
-        padding: 4px 10px;
-        background-color: white;
-    }
-
-    .nav-button:hover {
-        background-color: lightskyblue;
-    }
-    
     .options-container {
         display: flex;
         flex-direction: column;
@@ -103,8 +87,15 @@
 
     }
 
-    .graph {
-        background-color: blue;
-        
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
     }
+
+    .stat-container {
+        display: flex;
+        gap: 1em;
+    }
+    
+
 </style>
