@@ -34,8 +34,9 @@
     }
 
     function check_queue() {
-        if (delta == 0) {
+        if (delta == 0 && queue >= 1) {
             inventory += 1;
+            queue -= 1;
             delta = time;
         }
     }
