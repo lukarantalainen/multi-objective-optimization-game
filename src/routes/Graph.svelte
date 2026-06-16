@@ -5,6 +5,7 @@
 
 <div class="container">
   <div class="progress-container">
+    <h2>Progress</h2>
     <progress value={$money} max={target}></progress>
 
 

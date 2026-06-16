@@ -1,5 +1,6 @@
     <script lang="ts">
         import Graph from './Graph.svelte';
+        import Button from './Button.svelte';
         import { onMount } from 'svelte';
         import { money, target, day, finished } from './state';
 
@@ -169,7 +170,7 @@
                         <input type="range" name="weight" id="3" class="slider" bind:value={salary}>
                     </div>
                 </div>
-                <button onclick={make}>Make</button>
+                <Button text={"Make"} callback={make} />
                 <span>In queue: {queue}</span>
             </div>
             <Graph/>            
