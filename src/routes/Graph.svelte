@@ -34,7 +34,8 @@
 
   $effect(() => {
     if (!chart) return;
-      chart.data.labels = Array.from(Array($day).keys());
+      // eslint-disable-next-line no-useless-assignment
+      chart.data.labels = Array.from(Array(10).keys().map(x => ++x));
       chart.data.datasets[0].data = $values;
       chart.update();
   })
@@ -46,7 +47,7 @@
 <div class="container">
   <div class="progress-container">
     <h2>Progress</h2>
-    <meter value={$money} max={target}></meter>
+    <progress class="progress" value={$money} max={target}></progress>
     <p>{$money}/{target   }</p>
 
 
@@ -57,13 +58,16 @@
   {/if} 
   </div>
 
-  <canvas bind:this={canvas}></canvas>
+  <canvas width="500" class="graph" bind:this={canvas}></canvas>
 
 </div>
 
 <style>
+
+
   .container {
     display: flex;
+    justify-content: space-between;
   }
 
   .progress-container {
@@ -72,5 +76,27 @@
     justify-content: flex-start;
     align-items: left;
   }
+
+  progress {
+    width: 100%;
+    appearance: none;
+    border-radius: 10px;
+  }
+
+  progress::-webkit-progress-bar {
+      background: #ddd;
+      border-radius: 10px;
+  }
+
+  progress::-webkit-progress-value {
+      background: limegreen;
+      border-radius: 10px;
+  }
+
+  progress::-moz-progress-bar {
+      background: limegreen;
+      border-radius: 10px;
+  }
+
 </style>
 

@@ -49,12 +49,12 @@
         let sold: number = $state(0);
         let time_cost: number = $state(1);
 
-        let price: number = $state(10);
-        let comfort: number = $state(1);
-        let production_cost: number = $derived(5 * comfort ** 2);
-        
         let marketing: number = $state(0);
         let salary: number = $state(0);
+
+        let price: number = $state(10);
+        let comfort: number = $state(1);
+        let production_cost: number = $derived(Math.round(5 * comfort ** 2 + marketing**1.05 + salary**1.05));
         
         let queue: number = $state(0);
 
@@ -89,14 +89,9 @@
         }
 
         function addCustomer() {
-            if (price > production_cost * 2) {
-                return;
-            } else if (price > production_cost * 1.5) {
-                customers += 1;
-            } else if (price > production_cost * 1.3) {
-                customers += 2;
-            } else if (price > production_cost) {
-                customers += 3;
+            const sum = production_cost/price + marketing;
+            if (Math.random() * 5 < sum) {
+                ++customers;
             }
         }
 
