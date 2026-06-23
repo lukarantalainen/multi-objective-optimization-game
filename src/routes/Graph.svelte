@@ -1,22 +1,27 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-  import { money, target, day, finished } from './state';
+  import { onMount } from 'svelte';
+  import { money, target, day, values } from './state';
   import { Chart } from 'chart.js/auto';
 
   let canvas: HTMLCanvasElement;
+  let chart: Chart;
 
   onMount(() => {
-    new Chart(canvas, {
-      type: 'bar',
+    chart = new Chart(canvas, {
+      type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: [],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
+          label: 'Money',
+          data: $values,
         }]
       },
       options: {
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
         scales: {
           y: {
             beginAtZero: true
@@ -26,6 +31,15 @@
     });
 
   })
+
+  $effect(() => {
+    if (!chart) return;
+      chart.data.labels = Array.from(Array($day).keys());
+      chart.data.datasets[0].data = $values;
+      chart.update();
+  })
+
+  let finished: boolean = $derived($money >= target);
     
 </script>
 
@@ -36,7 +50,7 @@
     <p>{$money}/{target   }</p>
 
 
-  {#if $finished}
+  {#if finished}
     <span class="result-label">
       Congratulations! Reached {target} in {$day} days!
     </span>

@@ -2,13 +2,13 @@
         import Graph from './Graph.svelte';
         import Button from './Button.svelte';
         import { onMount } from 'svelte';
-        import { money, target, day, finished } from './state';
+        import { money, target, day, values } from './state';
 
-        let id: number;
+        let id: ReturnType<typeof setInterval>;
         const interval: number = 100;
         let paused: boolean = false;
         let pauseButtonState: string = $state("Pause");
-        function createInterval() {
+        function createInterval(): ReturnType<typeof setInterval> {
             return setInterval(handle_interval, interval);
         }
 
@@ -67,8 +67,9 @@
 
         function handle_interval() {
             if (day_event.next_trigger <= 0) {
-                day_event.next_trigger = day_event.interval;
+                day_event.next_trigger = day_event.interval;    
                 $day += 1;
+                values.update(items => ([...items, $money]))
             }
 
             if (make_event.next_trigger <= 0 && queue > 0) {
@@ -101,7 +102,6 @@
 
         function handleFinish() {
             pause();
-            $finished = true;
         }
 
         function changeMoney(delta: number) {
@@ -126,17 +126,12 @@
             changeMoney(-production_cost);
         }
 
-        function add_to_queue() {
-            if ($money < production_cost) return;
-            queue += 1;
-            changeMoney(-production_cost);
-        }
-
     </script>
 
     <div class="container">
         <div class="top-bar">
-            <div class="left-container">
+            <div class="stat-container">
+                <img class="logo counter" src="./src/lib/assets/favicon.png" alt="logo" width=30 height=30>
                 <span class="counter">Day {$day}</span>
                 <span class="counter">Inventory {inventory}</span>
                 <span class="counter">Money ${$money}</span>
@@ -170,7 +165,7 @@
                         <input type="range" name="weight" id="3" class="slider" bind:value={salary}>
                     </div>
                 </div>
-                <Button text={"Make"} callback={make} />
+                <Button text="Make" callback={make} />
                 <span>In queue: {queue}</span>
             </div>
             <Graph/>            
@@ -211,15 +206,17 @@
     .stat-container {
         display: flex;
         gap: 1em;
+        align-items: center;
     }
 
     .counter {
+        transition-duration: 100ms;
         border-radius: 10px;
         padding: 4px 10px;
     }
 
     .counter:hover {
-        background-color: lightblue;
+        background-color: rgb(83, 212, 255);
     }
 
     .footer {
@@ -228,4 +225,7 @@
         bottom: 0;
     }
 
+    .logo {
+        padding: 5px;  
+    }
 </style>
