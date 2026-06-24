@@ -195,7 +195,7 @@
         <Graph />
     </div>
     <footer class="footer">
-        <button onclick={playPause}>{pauseButtonState}</button>
+        <button class="pause-button" onclick={playPause}>{pauseButtonState}</button>
     </footer>
 </div>
 
@@ -255,13 +255,23 @@
     }
 
     .top-bar-stat:hover {
-        background-color: rgb(83, 212, 255);
+        background-color: rgb(60, 255, 0);
     }
 
     .footer {
-        width: 100%;
         position: absolute;
+        width: 100%;
         bottom: 0;
+    }
+
+    .pause-button {
+        border-radius: 10px;
+        margin: 5px;
+        border: none;
+        background-color: black;
+        color: yellow;
+        font-weight: 600;
+        padding: 4px 5px;
     }
 
     input[type="range"] {
