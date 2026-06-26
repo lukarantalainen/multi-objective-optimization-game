@@ -47,10 +47,12 @@
 </script>
 
 <div class="container">
-  <div class="progress-container">
+  <div class="stat-container">
     <h2>Progress</h2>
-    <progress class="progress" value={$money} max={target}></progress>
-    <p>{$money}/{target}</p>
+    <div class="progress-container">
+      <progress class="progress" value={$money} max={target}></progress>
+      <p class="progress-label">{$money}/{target}</p>
+    </div>
     <p>Spending {$spending}</p>
     <p>Revenue {$revenue}</p>
 
@@ -77,6 +79,20 @@
     justify-content: space-between;
   }
 
+  .progress-container {
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-label {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    z-index: 1;
+  }
+
   .canvas-container {
     display: flex;
     flex-grow: 1;
@@ -84,32 +100,29 @@
     max-height: 600px;
   }
 
-  .progress-container {
+  .stat-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: left;
   }
 
-  progress {
-    width: 100%;
+
+
+  progress[value] {
+    -webkit-appearance: none;
     appearance: none;
-    border-radius: 10px;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
   }
 
-  progress::-webkit-progress-bar {
-      background: #ddd;
-      border-radius: 10px;
+  progress[value]::-webkit-progress-bar {
+    background-color: gray;
   }
 
-  progress::-webkit-progress-value {
-      background: limegreen;
-      border-radius: 10px;
-  }
-
-  progress::-moz-progress-bar {
-      background: limegreen;
-      border-radius: 10px;
+  progress[value]::-webkit-progress-value {
+    background-color: greenyellow;
   }
 
 </style>
